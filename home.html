@@ -32,98 +32,92 @@
         .content {
             margin-left: 310px;
             padding: 20px;
-            width: calc(100% - 210px);
+            width: calc(100% - 310px);
             text-align: justify;
-
         }
         .section {
             margin-bottom: 20px;
         }
         .subsection {
             margin-left: 20px;
+            margin-bottom: 20px;
         }
     </style>
 </head>
 <body>
     <div class="sidebar">
         <a href="#introducao">Introdução</a>
-        <a href="#desenvolvimento">Desenvolvimento do Trabalho</a>
         <div class="subsection">
-            <a href="#cisc-vs-risc" style="color: lightgoldenrodyellow">Arquitetura CISC vs. RISC</a>
-            <a href="#conceito-pipeline" style="color: lightgoldenrodyellow">Conceito de Pipeline na Arquitetura RISC-V</a>
-            <a href="#vantagens-desafios" style="color: lightgoldenrodyellow">Vantagens e Desafios do Pipeline</a>
-            <a href="#exemplos-implementacao" style="color: lightgoldenrodyellow">Exemplos Práticos e Implementação</a>
-            <a href="#analise-detalhada" style="color: lightgoldenrodyellow">Análise Detalhada dos Estágios do Pipeline</a>
-            <a href="#consideracoes-implementacao" style="color: lightgoldenrodyellow">Considerações sobre a Implementação do Pipeline</a>
+            <a href="#o-que-e-cache" style="color: lightgoldenrodyellow">O Que é Memória Cache?</a>
+            <a href="#importancia-cache" style="color: lightgoldenrodyellow">Importância do Cache na Arquitetura de Computadores</a>
+            <a href="#niveis-cache" style="color: lightgoldenrodyellow">Níveis de Cache</a>
+            <a href="#funcoes-mapeamento" style="color: lightgoldenrodyellow">Funções de Mapeamento</a>
+            <a href="#vantagens-desvantagens" style="color: lightgoldenrodyellow">Vantagens e Desvantagens das Diferentes Funções de Mapeamento</a>
         </div>
         <a href="#ilustracoes">Ilustrações</a>
         <a href="#conclusoes">Conclusões</a>
-        <a href="#bibliografia">Bibliografia</a>
     </div>
     <div class="content">
         <div id="introducao" class="section">
             <h2>Introdução</h2>
-            <p>A arquitetura de computadores é um campo de estudo essencial para o desenvolvimento de sistemas de processamento eficientes. Neste trabalho, exploraremos a arquitetura RISC (Reduced Instruction Set Computer), com foco especial no conceito de pipeline. A arquitetura RISC foi desenvolvida como uma alternativa à arquitetura CISC (Complex Instruction Set Computer), com o objetivo de simplificar as instruções do processador para melhorar a eficiência. O pipeline é uma técnica fundamental em processadores modernos, pois permite o processamento simultâneo de múltiplas instruções, aumentando significativamente o throughput do sistema. Este trabalho detalha o funcionamento do pipeline na arquitetura RISC-V, abordando suas vantagens, desafios e soluções propostas para otimizar o processamento de instruções.</p>
+            <p>A arquitetura de computadores é um campo fundamental da ciência da computação que estuda a organização, o design e a operação dos sistemas de processamento de informações. Um dos conceitos-chave nessa área é a memória cache, uma tecnologia crucial para melhorar o desempenho dos processadores modernos. Este site tem como objetivo explorar detalhadamente o conceito de cache, suas diferentes formas de implementação, e como ele contribui para a eficiência e a velocidade dos sistemas computacionais.</p>
         </div>
-        <div id="desenvolvimento" class="section">
-            <h2>Desenvolvimento do Trabalho</h2>
-            <div id="cisc-vs-risc" class="subsection">
-                <h3>Arquitetura CISC vs. RISC</h3>
-                <p>A arquitetura CISC (Complex Instruction Set Computer) é caracterizada por um conjunto de instruções complexas, que podem demandar múltiplos ciclos de clock para serem executadas. Essas arquiteturas incluem dezenas de modos de endereçamento e instruções de tamanhos variados, frequentemente referenciando operandos na memória principal. A complexidade dessas instruções permite uma maior flexibilidade e uma programação mais compacta. No entanto, essa mesma complexidade torna mais difícil a implementação de pipelines eficientes, resultando em uma menor taxa de execução de instruções por ciclo (IPC). A unidade de controle nas arquiteturas CISC é microprogramada, o que implica em tempos maiores de decodificação e execução das instruções, pois cada instrução precisa ser interpretada por um microprograma específico.</p>
-                <p>Em contraste, a arquitetura RISC (Reduced Instruction Set Computer) foi desenvolvida para simplificar o conjunto de instruções. Na arquitetura RISC, as instruções são projetadas para serem executadas em um número fixo de ciclos de máquina, geralmente um ciclo por instrução. Isso facilita a implementação de pipelines, onde cada fase de processamento da instrução dura um ciclo de máquina. As operações aritméticas são realizadas entre registradores, e apenas instruções de load/store referenciam operandos na memória principal. A unidade de controle é geralmente hardwired, eliminando a necessidade de microprogramação e, consequentemente, reduzindo os tempos de decodificação e execução. Essa simplificação permite um maior paralelismo e uma maior eficiência no processamento de instruções.</p>
+            <div id="o-que-e-cache" class="subsection">
+                <h3>O Que é Memória Cache?</h3>
+                <p>A memória cache é uma forma de memória de alta velocidade que é usada para armazenar temporariamente os dados mais frequentemente acessados pelo processador. A ideia central por trás do cache é reduzir o tempo de acesso aos dados armazenados na memória principal (RAM), que é relativamente mais lenta. Quando o processador precisa acessar dados, ele primeiro verifica se esses dados estão no cache. Se estiverem, ele pode acessá-los rapidamente (um "cache hit"). Se não estiverem, ele precisa buscar os dados na memória principal (um "cache miss"), o que leva mais tempo.</p>
+                <p>Existem diversos tipos de memória cache, cada um com características específicas em termos de velocidade e capacidade. A memória cache pode ser embutida no processador ou pode ser uma memória separada, porém próxima do processador. Cada um desses tipos de cache desempenha um papel crucial na melhoria do desempenho do sistema.</p>
             </div>
-            <div id="conceito-pipeline" class="subsection">
-                <h3>Conceito de Pipeline na Arquitetura RISC-V</h3>
-                <p>O pipeline é uma técnica de processamento de instruções que divide a execução de uma instrução em várias fases, permitindo que múltiplas instruções sejam processadas simultaneamente em diferentes estágios do pipeline. Na arquitetura RISC-V, um pipeline típico pode ser dividido em cinco estágios principais:</p>
+            <div id="importancia-cache" class="subsection">
+                <h3>Importância do Cache na Arquitetura de Computadores</h3>
+                <p>Com o aumento constante da velocidade dos processadores, a discrepância entre a velocidade do processador e a velocidade da memória principal tem crescido. Essa discrepância pode levar a situações onde o processador passa uma grande quantidade de tempo esperando pela memória, reduzindo a eficiência do sistema. A memória cache ajuda a mitigar esse problema, armazenando temporariamente os dados mais relevantes e acessados com frequência, permitindo que o processador continue operando de maneira eficiente.</p>
+                <p>A memória cache é especialmente importante em aplicativos que requerem acesso rápido e frequente a grandes volumes de dados. Exemplos incluem bancos de dados, jogos, aplicativos gráficos e sistemas operacionais. Em tais aplicativos, a capacidade de acessar dados rapidamente pode fazer uma diferença significativa no desempenho geral do sistema.</p>
+                <p>Além disso, a memória cache é fundamental para a execução de algoritmos complexos e a manipulação de grandes quantidades de dados em tempo real. Sem a cache, muitas operações seriam drasticamente mais lentas, impactando negativamente a experiência do usuário e a eficiência do sistema.</p>
+            </div>
+            <div id="niveis-cache" class="subsection">
+                <h3>Níveis de Cache</h3>
+                <p>Os sistemas modernos geralmente utilizam vários níveis de cache, cada um com suas próprias características de velocidade e capacidade:</p>
                 <ul>
-                    <li>Busca de Instrução (Instruction Fetch - IF)</li>
-                    <li>Decodificação e Leitura de Registradores (Instruction Decode/Register Read - ID)</li>
-                    <li>Execução/Endereço de Memória (Execution/Effective Address - EX)</li>
-                    <li>Acesso à Memória (Memory Access - MEM)</li>
-                    <li>Escrita no Registrador (Write Back - WB)</li>
+                    <li><strong>Cache L1:</strong> É o mais rápido e menor em capacidade, localizado diretamente no chip do processador. É dividido em cache de instruções e cache de dados.</li>
+                    <li><strong>Cache L2:</strong> Maior que o L1, oferece um equilíbrio entre capacidade e velocidade.</li>
+                    <li><strong>Cache L3:</strong> Geralmente maior e mais lento que os caches L1 e L2, o cache L3 pode ser compartilhado entre vários núcleos do processador, melhorando o desempenho em tarefas multithread.</li>
                 </ul>
-                <p>Esta abordagem permite que uma nova instrução seja iniciada em cada ciclo de clock, aumentando significativamente o throughput do processador. O pipeline aproveita a sobreposição de diferentes estágios de instruções, de forma que várias instruções podem estar em diferentes estágios do pipeline simultaneamente.</p>
+                <p>Os diferentes níveis de cache são organizados hierarquicamente, com o cache L1 sendo o mais próximo do núcleo do processador e o cache L3 sendo o mais distante. Essa hierarquia permite que o cache forneça uma camada intermediária de memória de alta velocidade, melhorando o desempenho geral do sistema.</p>
+                <p>Adicionalmente, a utilização de múltiplos níveis de cache permite um gerenciamento mais eficiente dos dados. O cache L1, sendo o mais rápido, atende às necessidades imediatas do processador, enquanto o cache L2 e L3 armazenam dados que podem ser utilizados em operações subsequentes, reduzindo a necessidade de acessos frequentes à memória principal.</p>
             </div>
-            <div id="vantagens-desafios" class="subsection">
-                <h3>Vantagens e Desafios do Pipeline</h3>
-                <p>O principal benefício do pipeline é o aumento do throughput, já que várias instruções podem ser processadas simultaneamente. No entanto, essa técnica não reduz o tempo de execução de cada instrução individual, mas sim o tempo total necessário para processar um grande número de instruções. O desempenho do pipeline é limitado pelo estágio mais lento, e o tempo para encher e esvaziar o pipeline pode diminuir o ganho de velocidade (speedup).</p>
-                <p>Os principais desafios do pipeline incluem dependências de dados e controle. As dependências de dados ocorrem quando uma instrução depende dos resultados de uma instrução anterior ainda em processamento. A solução para esse problema é o forwarding, onde os dados são encaminhados diretamente para os estágios que necessitam deles, sem esperar que sejam escritos de volta nos registradores. As dependências de controle, por outro lado, surgem em instruções de desvio (branch instructions), onde o próximo endereço de instrução depende do resultado de uma comparação. A solução para isso inclui técnicas de predição dinâmica de desvios, onde o processador faz suposições educadas sobre qual caminho seguir e, em caso de erro, reverte as instruções já processadas incorretamente.</p>
+            <div id="funcoes-mapeamento" class="subsection">
+                <h3>Funções de Mapeamento</h3>
+                <p>Para entender melhor como os dados são armazenados e acessados na cache, é crucial explorar as diferentes funções de mapeamento utilizadas:</p>
+                <h4>Mapeamento Direto</h4>
+                <p>No mapeamento direto, cada bloco de memória principal é mapeado para exatamente uma linha na cache. É simples de implementar e eficiente em termos de hardware, mas pode levar a muitos "cache misses" se diferentes blocos de memória competirem pela mesma linha de cache. No mapeamento direto, o endereço da memória principal é dividido em três partes: índice, tag e deslocamento. O índice determina a linha na cache, a tag é usada para verificar se o bloco está na linha correta e o deslocamento identifica o local exato dentro do bloco.</p>
+                <p>Apesar de sua simplicidade, o mapeamento direto pode ser ineficiente em sistemas onde há uma alta competição por linhas específicas na cache. Isso pode ocorrer em programas com padrões de acesso a memória previsíveis, onde múltiplos blocos de dados são frequentemente acessados em sequência.</p>
+                <h4>Mapeamento Associativo</h4>
+                <p>No mapeamento associativo, qualquer bloco de memória pode ser armazenado em qualquer linha da cache. Isso reduz os conflitos de mapeamento, mas aumenta a complexidade e o tempo de busca, pois todas as linhas da cache precisam ser verificadas para cada acesso. No mapeamento associativo, o endereço da memória principal é dividido em tag e deslocamento, eliminando a necessidade de um índice. A tag é usada para verificar se o bloco está na cache e o deslocamento identifica o local exato dentro do bloco.</p>
+                <p>O mapeamento associativo é mais flexível e pode resultar em uma maior taxa de acertos, mas a busca por um bloco específico pode ser mais lenta devido à necessidade de verificar múltiplas linhas da cache. Este método é ideal para sistemas onde a taxa de acertos é crítica e a complexidade adicional pode ser tolerada.</p>
+                <h4>Mapeamento Associativo por Conjuntos</h4>
+                <p>No mapeamento associativo por conjuntos, a cache é dividida em vários conjuntos onde cada conjunto pode armazenar blocos em qualquer linha dentro dele. Isso oferece um equilíbrio entre simplicidade e flexibilidade, reduzindo conflitos de mapeamento e melhorando o desempenho. No mapeamento associativo por conjuntos, o endereço da memória principal é dividido em três partes: índice, tag e deslocamento. O índice determina o conjunto na cache, a tag é usada para verificar se o bloco está no conjunto correto e o deslocamento identifica o local exato dentro do bloco.</p>
+                <p>Este método é amplamente utilizado em sistemas modernos devido à sua eficácia em diversas situações. Ele oferece uma boa combinação de alta taxa de acertos e eficiência de busca, sendo uma escolha comum em arquiteturas de cache contemporâneas.</p>
             </div>
-            <div id="exemplos-implementacao" class="subsection">
-                <h3>Exemplos Práticos e Implementação</h3>
-                <p>Para ilustrar o funcionamento do pipeline, considere a instrução LOAD, que é uma das mais longas em termos de ciclos de clock. A execução de uma instrução LOAD no pipeline RISC-V seguiria os cinco estágios descritos anteriormente. Vamos detalhar um exemplo de execução com 100 instruções em diferentes arquiteturas para evidenciar a eficiência do pipeline:</p>
-                <ul>
-                    <li>Computador com um único ciclo: Cada instrução leva 45 ns por ciclo, resultando em um total de 4500 ns para 100 instruções.</li>
-                    <li>Computador multiciclo: Cada instrução leva 10 ns por ciclo, com uma média de 4,2 ciclos por instrução (CPI), resultando em um total de 4200 ns para 100 instruções.</li>
-                    <li>Computador com pipeline de 5 estágios: Cada ciclo leva 10 ns, e com um CPI ideal de 1, o tempo total seria de 1040 ns (considerando o tempo para encher e esvaziar o pipeline).</li>
-                </ul>
-                <p>Esses exemplos mostram como o pipeline pode aumentar significativamente a eficiência do processador. No caso de um computador com pipeline, mesmo considerando o tempo necessário para encher e esvaziar o pipeline, o tempo total de execução é muito menor do que em arquiteturas de ciclo único ou multiciclo.</p>
+            <div id="vantagens-desvantagens" class="subsection">
+                <h3>Vantagens e Desvantagens das Diferentes Funções de Mapeamento</h3>
+                <h4>Mapeamento Direto</h4>
+                <p>O mapeamento direto tem a vantagem de ser simples de implementar e rápido na determinação da posição na cache. No entanto, ele pode levar a uma alta taxa de "cache misses" devido a conflitos de mapeamento, onde diferentes blocos de memória competem pela mesma linha na cache. Esse método é adequado para sistemas onde a simplicidade e a velocidade de implementação são mais importantes do que a taxa de acertos.</p>
+                <p>Além disso, o mapeamento direto pode ser mais eficiente em termos de consumo de energia, já que exige menos circuitos de controle comparado a outros métodos de mapeamento. No entanto, sua limitação principal é a baixa flexibilidade em cenários com acessos de memória altamente variáveis.</p>
+                <h4>Mapeamento Associativo</h4>
+                <p>O mapeamento associativo é mais flexível, pois permite que qualquer bloco de memória seja armazenado em qualquer linha da cache. Isso reduz os conflitos de mapeamento e melhora a taxa de acertos. No entanto, a complexidade e o tempo de busca aumentam, pois todas as linhas da cache precisam ser verificadas para cada acesso. Esse método é ideal para sistemas onde a taxa de acertos é crítica e a complexidade adicional pode ser tolerada.</p>
+                <p>Uma desvantagem significativa do mapeamento associativo é a necessidade de hardware mais complexo para gerenciar as buscas e as verificações das linhas de cache. Isso pode resultar em um custo maior e um aumento no consumo de energia do sistema.</p>
+                <h4>Mapeamento Associativo por Conjuntos</h4>
+                <p>O mapeamento associativo por conjuntos oferece um bom equilíbrio entre flexibilidade e eficiência. Dividindo a cache em conjuntos e permitindo que qualquer bloco de memória seja armazenado em qualquer linha dentro de um conjunto, ele reduz os conflitos de mapeamento e melhora a taxa de acertos, mantendo a complexidade e o tempo de busca em níveis gerenciáveis. Esse método é amplamente utilizado em sistemas modernos devido à sua eficácia em diversas situações.</p>
+                <p>Apesar de suas vantagens, o mapeamento associativo por conjuntos também pode ter limitações, especialmente em sistemas com um grande número de conjuntos. A complexidade do hardware pode aumentar, exigindo um controle preciso para garantir que os dados sejam armazenados e recuperados de maneira eficiente.</p>
             </div>
-            <div id="analise-detalhada" class="subsection">
-                <h3>Análise Detalhada dos Estágios do Pipeline</h3>
-                <p>Cada estágio do pipeline desempenha um papel crucial na execução de uma instrução. A busca de instrução (IF) é responsável por buscar a próxima instrução da memória. Na decodificação e leitura de registradores (ID), a instrução é decodificada, e os operandos são lidos dos registradores. Na execução (EX), a operação aritmética ou lógica é realizada, ou o endereço efetivo é calculado. No acesso à memória (MEM), os dados são lidos ou escritos na memória principal. Finalmente, na escrita no registrador (WB), os resultados da instrução são escritos de volta nos registradores. Esta segmentação permite que diferentes instruções utilizem diferentes partes do pipeline simultaneamente, aumentando a eficiência geral do processador.</p>
-            </div>
-            <div id="consideracoes-implementacao" class="subsection">
-                <h3>Considerações sobre a Implementação do Pipeline</h3>
-                <p>A implementação de um pipeline eficiente requer um planejamento cuidadoso para lidar com dependências de dados e controle. Técnicas como o forwarding e a predição de desvios são essenciais para minimizar os impactos dessas dependências. Além disso, a segmentação adequada das instruções e o balanceamento da carga de trabalho entre os estágios são cruciais para a eficiência. A arquitetura RISC-V, com suas características orientadas a registradores e instruções de formato fixo, exemplifica como essas técnicas podem ser aplicadas para otimizar o desempenho do processador.</p>
-            </div>
-        </div>
         <div id="ilustracoes" class="section">
-            <h2>Ilustrações</h2>
-            <p>Aqui serão incluídas ilustrações detalhadas do funcionamento do pipeline, diagramas e exemplos visuais que complementam o texto explicativo.</p>
+            <h2>Quadrinho</h2>
+            <p>Aqui segue um quadrinho que ajuda a visualizar e entender as funções de mapeamento.</p>
+            <img src="1.png" width="1500" alt="quadrinho com analogias explicando funcoes de mapeamento">
         </div>
         <div id="conclusoes" class="section">
             <h2>Conclusões</h2>
-            <p>O estudo do pipeline na arquitetura RISC-V demonstra como a simplificação do conjunto de instruções e a segmentação do processamento podem resultar em um aumento significativo na eficiência do processador. A técnica de pipeline permite que várias instruções sejam processadas simultaneamente, aumentando o throughput geral do sistema. Apesar dos desafios inerentes, como as dependências de dados e controle, as soluções implementadas, como forwarding e predição de desvios, garantem que o pipeline funcione de maneira eficaz. A arquitetura RISC-V, com suas características orientadas a registradores e instruções de formato fixo, exemplifica como essas técnicas podem ser aplicadas para otimizar o desempenho do processador.</p>
-        </div>
-        <div id="bibliografia" class="section">
-            <h2>Bibliografia</h2>
-            <ul>
-                <li>Patterson, D. A., & Hennessy, J. L. (2013). Computer Organization and Design RISC-V Edition: The Hardware/Software Interface. Morgan Kaufmann.</li>
-                <li>Tanenbaum, A. S., & Austin, T. (2012). Structured Computer Organization. Pearson.</li>
-                <li>Knuth, D. E. (1971). An Empirical Study of FORTRAN Programs. Software: Practice and Experience, 1(2), 105-133.</li>
-                <li>Wortman, D. B., & Knuth, D. E. (1973). Measuring and Improving Performance in High-Level Languages. IEEE Transactions on Computers, C-22(12), 1161-1168.</li>
-            </ul>
+            <p>Ao compreender os conceitos de memória cache e suas diversas funções de mapeamento, podemos apreciar a importância dessa tecnologia na melhoria do desempenho dos sistemas de computação. A escolha da função de mapeamento adequada pode ter um impacto significativo na eficiência do sistema, dependendo das características do aplicativo e do padrão de acesso aos dados. Esperamos que este site tenha fornecido uma visão abrangente e esclarecedora sobre o cache e suas aplicações práticas.</p>
+            <p>O estudo da memória cache continua a evoluir, com novas técnicas e tecnologias sendo desenvolvidas para lidar com os desafios de desempenho e eficiência. Pesquisas futuras podem focar em otimizar ainda mais as funções de mapeamento e explorar novos tipos de memória cache que possam melhorar ainda mais o desempenho dos sistemas de computação.</p>
         </div>
     </div>
 </body>
